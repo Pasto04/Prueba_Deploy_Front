@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Usuario } from '../shared/usuario.entity.js';
 import { AlmacenamientoService } from './almacenamiento.service.js';
 import { SideNavService } from './side-nav.service.js';
+import { environment } from '../../environments/environment';
 
 const USER_KEY = 'Usuario';
 const TOKEN_KEY = 'token'; // Definir la clave para el token
@@ -23,7 +24,7 @@ export class UsuarioService {
     private sideNavService: SideNavService
   ) {}
 
-  readonly urlUsuario = 'http://localhost:3000/api/usuarios';
+  readonly urlUsuario = `${environment.apiUrl}/usuarios`;
 
   public registrarUsuario(usuario: UsuarioRegistro) {
     const url = this.urlUsuario + '/registro';
