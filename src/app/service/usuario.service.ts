@@ -103,5 +103,6 @@ export class UsuarioService {
   public showTipoUsuario(): string {
     return this.usuarioSubject.value.tipoUsuario;
   }
+///hola esteban quito
 }
 
