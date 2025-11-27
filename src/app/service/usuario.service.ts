@@ -24,7 +24,7 @@ export class UsuarioService {
     private sideNavService: SideNavService
   ) {}
 
-  readonly urlUsuario = `${environment.apiUrl}/usuarios`;
+  readonly urlUsuario = `https://prueba-deploy-back-2u9b.onrender.com/api/usuarios`;
 
   public registrarUsuario(usuario: UsuarioRegistro) {
     const url = this.urlUsuario + '/registro';
