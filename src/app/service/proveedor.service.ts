@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Proveedor } from '../models/mesa.models.js';
 import { Observable, tap, map } from 'rxjs';
 import { ResponseProveedores } from '../models/mesa.models.js';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProveedorService {
-  private readonly apiUrl = 'http://localhost:3000/api/proveedores';
+  private readonly apiUrl = `${environment.apiUrl}/proveedores`;
 
   constructor(private http: HttpClient) {}
 

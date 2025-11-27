@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { Ingrediente, ResponseIngredientes } from '../models/mesa.models.js';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IngredienteService {
 
-  private readonly apiUrl = 'http://localhost:3000/api/ingredientes';
+  private readonly apiUrl = `${environment.apiUrl}/ingredientes`;
 
   constructor(private http: HttpClient) { }
 

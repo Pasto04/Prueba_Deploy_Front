@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ResponseResenas } from '../models/mesa.models.js';
 import { UsuarioService } from './usuario.service.js';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ResenaService {
-  private apiUrl = 'http://localhost:3000/api/clientes';
+  private apiUrl = `${environment.apiUrl}/clientes`;
 
   constructor(
     private http: HttpClient,
@@ -16,7 +17,7 @@ export class ResenaService {
   ) {}
 
   obtenerResenas(): Observable<ResponseResenas> {
-    return this.http.get<ResponseResenas>('http://localhost:3000/api/resenas');
+    return this.http.get<ResponseResenas>(`${environment.apiUrl}/resenas`);
   }
 
   crearResena(nroPed: number, resena: { cuerpo: string; puntaje: number }): Observable<any> {

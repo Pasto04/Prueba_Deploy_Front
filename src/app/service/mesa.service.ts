@@ -6,12 +6,13 @@ import { ResponseMesas } from '../models/mesa.models.js';
 import { ResponseMesa } from '../models/mesa.models.js';
 import { map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MesaService {
-  private readonly apiUrl = 'http://localhost:3000/api/mesas';
+  private readonly apiUrl = `${environment.apiUrl}/mesas`;
 
   constructor(private http: HttpClient) {}
 

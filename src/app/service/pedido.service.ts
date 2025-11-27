@@ -5,6 +5,7 @@ import { Observable, of, throwError, forkJoin, catchError } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { UsuarioService } from './usuario.service';
 import { TarjetaService } from './tarjeta.service';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class PedidoService {
   private platosPedido: PlatoConCantidad[] = [];
   private bebidasPedido: BebidaConCantidad[] = [];
   private pedidoEnCurso: boolean = false;
-  private apiUrl = 'http://localhost:3000/api/clientes';
+  private apiUrl = `${environment.apiUrl}/clientes`;
 
   constructor(
     private http: HttpClient,
@@ -84,17 +85,17 @@ export class PedidoService {
 
     const requests: Observable<any>[] = [];
     bebidasData.forEach(bebida => {
-      requests.push(this.http.post(`http://localhost:3000/api/pedidos/${nroPed}/bebidas`, bebida));
+      requests.push(this.http.post(`${environment.apiUrl}/pedidos/${nroPed}/bebidas`, bebida));
     });
     platosData.forEach(plato => {
-      requests.push(this.http.post(`http://localhost:3000/api/pedidos/${nroPed}/platos`, plato));
+      requests.push(this.http.post(`${environment.apiUrl}/pedidos/${nroPed}/platos`, plato));
     });
     return requests.length > 0 ? forkJoin(requests) : of(null);
   }
 
   obtenerPlatosBebidasPorPedido(pedidoId: number): Observable<{ platos: PlatoConCantidad[], bebidas: BebidaConCantidad[] }> {
-    const obtenerPlatos = this.http.get<{ data: PlatoPedidosEst[] }>(`http://localhost:3000/api/pedidos/${pedidoId}/platos`, {withCredentials: true});
-    const obtenerBebidas = this.http.get<{ data: BebidaPedidoEst[] }>(`http://localhost:3000/api/pedidos/${pedidoId}/bebidas`, {withCredentials: true});
+    const obtenerPlatos = this.http.get<{ data: PlatoPedidosEst[] }>(`${environment.apiUrl}/pedidos/${pedidoId}/platos`, {withCredentials: true});
+    const obtenerBebidas = this.http.get<{ data: BebidaPedidoEst[] }>(`${environment.apiUrl}/pedidos/${pedidoId}/bebidas`, {withCredentials: true});
 
     return forkJoin([obtenerPlatos, obtenerBebidas]).pipe(
       map(([ResponsePlatoEst, ResponseBebidaEst]) => {
@@ -129,11 +130,11 @@ export class PedidoService {
   }
 
 marcarPlatoComoRecibido(nroPed: number, numPlato: number): Observable<any> {
-  return this.http.get<{ data: PlatoPedidosEst[] }>(`http://localhost:3000/api/pedidos/${nroPed}/platos`, {withCredentials: true}).pipe(
+  return this.http.get<{ data: PlatoPedidosEst[] }>(`${environment.apiUrl}/pedidos/${nroPed}/platos`, {withCredentials: true}).pipe(
     switchMap(ResponsePlatoEst => {
       const plato = ResponsePlatoEst.data.find(p => p.plato.numPlato === numPlato);
       if (plato) {
-        const url = `http://localhost:3000/api/pedidos/${nroPed}/platos/${numPlato}/fecha/${plato.fechaSolicitud}/hora/${plato.horaSolicitud}`;
+        const url = `${environment.apiUrl}/pedidos/${nroPed}/platos/${numPlato}/fecha/${plato.fechaSolicitud}/hora/${plato.horaSolicitud}`;
         const platoData = { cantidad: plato.cantidad, recibido: true };
         return this.http.put(url, platoData, {withCredentials: true});
       } else {
@@ -144,7 +145,7 @@ marcarPlatoComoRecibido(nroPed: number, numPlato: number): Observable<any> {
 }
 
 marcarBebidaComoRecibida(nroPed: number, codBebida: number): Observable<any> {
-  return this.http.get<{ data: BebidaPedidoEst[] }>(`http://localhost:3000/api/pedidos/${nroPed}/bebidas`, {withCredentials: true}).pipe(
+  return this.http.get<{ data: BebidaPedidoEst[] }>(`${environment.apiUrl}/pedidos/${nroPed}/bebidas`, {withCredentials: true}).pipe(
     switchMap(ResponseBebidaEst => {
       const bebida = ResponseBebidaEst.data.find(b => b.bebida.codBebida === codBebida);
       if (bebida) {
@@ -152,7 +153,7 @@ marcarBebidaComoRecibida(nroPed: number, codBebida: number): Observable<any> {
         const horaSolicitud = bebida.horaSolicitud;
 
         return this.http.put(
-          `http://localhost:3000/api/pedidos/${nroPed}/bebidas/${codBebida}/fecha/${fechaSolicitud}/hora/${horaSolicitud}`,
+          `${environment.apiUrl}/pedidos/${nroPed}/bebidas/${codBebida}/fecha/${fechaSolicitud}/hora/${horaSolicitud}`,
           {}
         );
       } else {
@@ -175,7 +176,7 @@ marcarBebidaComoRecibida(nroPed: number, codBebida: number): Observable<any> {
         }
 
         const nuevoPago = { tarjetaCliente: tarjetaSeleccionada.idTarjeta };
-        const postUrl = `http://localhost:3000/api/pedidos/${nroPed}/pagos`;
+        const postUrl = `${environment.apiUrl}/pedidos/${nroPed}/pagos`;
 
         return this.http.post(postUrl, nuevoPago, {withCredentials: true}).pipe(
           switchMap(pagoCreado => {
@@ -215,13 +216,13 @@ marcarBebidaComoRecibida(nroPed: number, codBebida: number): Observable<any> {
   }
 
 eliminarPlatoDelPedido(nroPed: number, numPlato: number): Observable<any> {
-  return this.http.get<{ data: PlatoPedidosEst[] }>(`http://localhost:3000/api/pedidos/${nroPed}/platos`, {withCredentials: true}).pipe(
+  return this.http.get<{ data: PlatoPedidosEst[] }>(`${environment.apiUrl}/pedidos/${nroPed}/platos`, {withCredentials: true}).pipe(
     switchMap(ResponsePlatoEst => {
       const plato = ResponsePlatoEst.data.find(p => p.plato.numPlato === numPlato);
       if (plato) {
         const fecha = plato.fechaSolicitud;
         const hora = plato.horaSolicitud;
-        const url = `http://localhost:3000/api/pedidos/${nroPed}/platos/${numPlato}/fecha/${fecha}/hora/${hora}`;
+        const url = `${environment.apiUrl}/pedidos/${nroPed}/platos/${numPlato}/fecha/${fecha}/hora/${hora}`;
         return this.http.delete(url).pipe(
           catchError(error => {
             console.error('Error al eliminar el plato', error);
@@ -238,13 +239,13 @@ eliminarPlatoDelPedido(nroPed: number, numPlato: number): Observable<any> {
 
 
 eliminarBebidaDelPedido(nroPed: number, codBebida: number): Observable<any> {
-  return this.http.get<{ data: BebidaPedidoEst[] }>(`http://localhost:3000/api/pedidos/${nroPed}/bebidas`).pipe(
+  return this.http.get<{ data: BebidaPedidoEst[] }>(`${environment.apiUrl}/pedidos/${nroPed}/bebidas`).pipe(
     switchMap(ResponseBebidaEst => {
       const bebida = ResponseBebidaEst.data.find(b => b.bebida.codBebida === codBebida);
       if (bebida) {
         const fecha = bebida.fechaSolicitud;
         const hora = bebida.horaSolicitud;
-        const url = `http://localhost:3000/api/pedidos/${nroPed}/bebidas/${codBebida}/fecha/${fecha}/hora/${hora}`;
+        const url = `${environment.apiUrl}/pedidos/${nroPed}/bebidas/${codBebida}/fecha/${fecha}/hora/${hora}`;
         return this.http.delete(url).pipe(
           catchError(error => {
             console.error('Error al eliminar la bebida', error);
@@ -274,6 +275,6 @@ eliminarBebidaDelPedido(nroPed: number, codBebida: number): Observable<any> {
   }
 
   obtenerPlatosDelPedido(pedidoId: number): Observable<PlatoConCantidad[]> {
-    return this.http.get<PlatoConCantidad[]>(`http://localhost:3000/api/pedidos/${pedidoId}/platos`);
+    return this.http.get<PlatoConCantidad[]>(`${environment.apiUrl}/pedidos/${pedidoId}/platos`);
   }
 }

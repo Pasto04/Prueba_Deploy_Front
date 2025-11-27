@@ -4,12 +4,13 @@ import { Observable, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Tipotarjeta } from '../models/mesa.models.js';
 import { ResponseTipotarjeta } from '../models/mesa.models.js';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TipoTarjetaService {
-  private readonly apiUrl = 'http://localhost:3000/api/tarjetas';
+  private readonly apiUrl = `${environment.apiUrl}/tarjetas`;
 
   constructor(private http: HttpClient) { }
 

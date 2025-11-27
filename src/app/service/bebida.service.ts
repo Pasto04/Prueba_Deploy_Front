@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { Bebida } from '../models/mesa.models.js';
 import { ResponseBebidas } from '../models/mesa.models.js';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BebidaService {
-  private readonly apiUrl = 'http://localhost:3000/api/bebidas';
+  private readonly apiUrl = `${environment.apiUrl}/bebidas`;
 
   constructor(private http: HttpClient) {}
 

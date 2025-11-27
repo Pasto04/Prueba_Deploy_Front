@@ -4,12 +4,13 @@ import { Observable,tap,catchError,throwError,map } from 'rxjs';
 import { PlatoIngrediente } from '../models/mesa.models.js';
 import { Ingrediente } from '../models/mesa.models.js';
 import { Plato } from '../models/mesa.models.js';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ElaboracionplatoService {
-  private apiUrl = 'http://localhost:3000/api/platos';
+  private apiUrl = `${environment.apiUrl}/platos`;
 
   constructor(private http: HttpClient) {}
 

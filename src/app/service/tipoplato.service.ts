@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Tipoplato } from '../models/mesa.models.js';
 import { Observable, tap } from 'rxjs';
 import { ResponseTipoplato } from '../models/mesa.models.js';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TipoplatoService {
-  private readonly apiUrl = 'http://localhost:3000/api/platos/tipos';
+  private readonly apiUrl = `${environment.apiUrl}/platos/tipos`;
 
   constructor(private http: HttpClient) {}
 

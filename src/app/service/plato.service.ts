@@ -5,12 +5,13 @@ import { tap, switchMap } from 'rxjs/operators';
 import { Plato } from '../models/mesa.models.js';
 import { ResponsePlato } from '../models/mesa.models.js';
 import { Plato1 } from '../models/mesa.models.js';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlatoService {
-  private readonly apiUrl = 'http://localhost:3000/api/platos';
+  private readonly apiUrl = `${environment.apiUrl}/platos`;
 
   constructor(private http: HttpClient) {}
 
