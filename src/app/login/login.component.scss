@@ -2,7 +2,7 @@
   color: black;
   font-size: 1.8rem;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  padding-left: 7.7rem;
+  padding-left: 5.5rem;
   margin-bottom: 1.2rem;
 }
 
@@ -16,6 +16,10 @@
 
 .detalles {
   width: 28rem;
+  background-color: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
 }
 
 form {

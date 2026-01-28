@@ -3,8 +3,9 @@
   display: block;
   margin: 10px;
   padding: 10px;
-  background-color: #f4f4f4;
-  border-radius: 8px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
 }
 
 h2 {
@@ -94,6 +95,7 @@ option {
   align-items: center;
   gap: 10px;
   width: 100%;
+  padding-right: 15px;
 }
 
 .cantidad-container {
@@ -191,6 +193,10 @@ button[disabled] {
 .card {
   position: relative;
   padding: 10px;
+}
+
+.btn-recibido{
+
 }
 
 @media (max-width: 768px) {

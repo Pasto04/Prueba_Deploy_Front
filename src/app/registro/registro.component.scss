@@ -8,14 +8,24 @@
 
 .register_box {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  margin-top: 3rem;
+    justify-content: center;
+    align-items: start;
+    height: 100%;
+    padding-top: 3rem;
+  }
+
+
+.contenedor{
+  background-color: white;
+  padding: 30px;
+  border-radius: 20px;
+  top: 10px;
+  box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
 }
 
 .register {
   width: 25rem;
+  
 }
 
 .login {

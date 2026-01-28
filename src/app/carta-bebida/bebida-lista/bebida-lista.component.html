@@ -18,7 +18,7 @@
   <div *ngFor="let bebida of filteredBebidas" class="flip-card" (click)="toggleFlip(bebida)">
     <div class="flip-card-inner" [class.flipped]="bebida.flipped">
       <div class="flip-card-front">
-        <img *ngIf="bebida.imagen" [src]="bebida.imagen" alt="{{ bebida.descripcion }}">
+        <img *ngIf="bebida.imagen" [src]="bebida.imagen" alt="{{ bebida.descripcion }}" class="imagen">
         <h2>{{ bebida.descripcion }}</h2>
       </div>
       <div class="flip-card-back">

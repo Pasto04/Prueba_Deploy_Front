@@ -1,36 +1,38 @@
 <div class="register_box">
-  <div class="register">
-    <p class="titulo">Formulario de Registro</p>
-    <form [formGroup]="formularioRegistro" (ngSubmit)="enviar()">
-      <text-input [control]="fc['nombre']" [mostrarErrores]="enviado" label="Nombre">
-      </text-input>
+  <div class="contenedor">
+    <div class="register">
+      <p class="titulo">Formulario de Registro</p>
+      <form [formGroup]="formularioRegistro" (ngSubmit)="enviar()">
+        <text-input [control]="fc['nombre']" [mostrarErrores]="enviado" label="Nombre">
+        </text-input>
 
-      <text-input [control]="fc['apellido']" [mostrarErrores]="enviado" label="Apellido">
-      </text-input>
+        <text-input [control]="fc['apellido']" [mostrarErrores]="enviado" label="Apellido">
+        </text-input>
 
-      <text-input [control]="fc['email']" [mostrarErrores]="enviado" label="Email">
-      </text-input>
+        <text-input [control]="fc['email']" [mostrarErrores]="enviado" label="Email">
+        </text-input>
 
-      <text-input [control]="fc['contrasenia']" [mostrarErrores]="enviado" label="Contraseña">
-      </text-input>
+        <text-input [control]="fc['contrasenia']" [mostrarErrores]="enviado" label="Contraseña">
+        </text-input>
 
-      <text-input [control]="fc['confirmarContrasenia']" [mostrarErrores]="enviado" label="Confirmar Contraseña">
-      </text-input>
+        <text-input [control]="fc['confirmarContrasenia']" [mostrarErrores]="enviado" label="Confirmar Contraseña">
+        </text-input>
 
-      <text-input [control]="fc['telefono']" [mostrarErrores]="enviado" label="Teléfono">
-      </text-input>
+        <text-input [control]="fc['telefono']" [mostrarErrores]="enviado" label="Teléfono">
+        </text-input>
 
-      <text-input [control]="fc['tipoUsuario']" [mostrarErrores]="enviado" label="Tipo de Usuario">
-      </text-input>
+        <text-input [control]="fc['tipoUsuario']" [mostrarErrores]="enviado" label="Tipo de Usuario">
+        </text-input>
 
-      <default-button texto="Registrarse"></default-button>
+        <default-button texto="Registrarse"></default-button>
 
-      <div class="login">
-        <p>¿Ya tiene una cuenta?</p> &nbsp;
-        <a routerLink="/login">
-          Inicie sesión aquí
-        </a>
-      </div>
-    </form>
+        <div class="login">
+          <p>¿Ya tiene una cuenta?</p> &nbsp;
+          <a routerLink="/login">
+            Inicie sesión aquí
+          </a>
+        </div>
+      </form>
+    </div>
   </div>
 </div>

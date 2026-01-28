@@ -18,7 +18,7 @@
   <div *ngFor="let plato of filteredPlatos" class="flip-card" (click)="plato.isFlipped = !plato.isFlipped">
     <div class="flip-card-inner" [class.flipped]="plato.isFlipped">
       <div class="flip-card-front">
-        <img *ngIf="plato.imagen" [src]="plato.imagen" alt="{{ plato.descripcion }}">
+        <img *ngIf="plato.imagen" [src]="plato.imagen" alt="{{ plato.descripcion }}" class="imagen">
         <h2>{{ plato.descripcion }}</h2>
       </div>
       <div class="flip-card-back">
