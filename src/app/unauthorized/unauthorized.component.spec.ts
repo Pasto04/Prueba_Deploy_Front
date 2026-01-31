@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { UnauthorizedComponent } from './unauthorized.component';
 
 describe('UnauthorizedComponent', () => {
@@ -8,7 +7,9 @@ describe('UnauthorizedComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UnauthorizedComponent]
+      // AL SER UN COMPONENTE CLÁSICO, VA EN DECLARATIONS:
+      declarations: [ UnauthorizedComponent ], 
+      imports: [] // Dejamos imports vacío (o lo borras)
     })
     .compileComponents();
     
